@@ -13,3 +13,7 @@ actual val platformModule = module {
 }
 
 actual fun appDispatcher(): CoroutineDispatcher = Dispatchers.Default
+
+actual class KmmDiModule(){
+
+}

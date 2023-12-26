@@ -5,8 +5,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.kmm.moonflower.android.data.Plant
+//import com.kmm.moonflower.android.data.Plant
+import com.kmm.moonflower.core.model.database.Plant
 import com.kmm.moonflower.android.data.PlantRepository
+import com.kmm.moonflower.features.plants.PlantsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
@@ -18,7 +20,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class PlantListViewModel @Inject internal constructor(
-    plantRepository: PlantRepository,
+//    plantRepository: PlantRepository,
+    plantRepository: PlantsRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -64,6 +67,8 @@ class PlantListViewModel @Inject internal constructor(
          *    }.launchIn(viewModelScope)
          */
         viewModelScope.launch {
+            plantRepository.insertPlatnsJson("json/plants.json")
+
             growZone.collect { newGrowZone ->
                 savedStateHandle.set(GROW_ZONE_SAVED_STATE_KEY, newGrowZone)
             }

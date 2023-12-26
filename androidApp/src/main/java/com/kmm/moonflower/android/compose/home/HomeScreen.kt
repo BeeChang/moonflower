@@ -39,7 +39,8 @@ import com.google.accompanist.themeadapter.material.MdcTheme
 import com.kmm.moonflower.android.compose.garden.GardenScreen
 import com.kmm.moonflower.android.R
 import com.kmm.moonflower.android.compose.plantlist.PlantListScreen
-import com.kmm.moonflower.android.data.Plant
+//import com.kmm.moonflower.android.data.Plant
+import com.kmm.moonflower.core.model.database.Plant
 import com.kmm.moonflower.android.databinding.HomeScreenBinding
 import kotlinx.coroutines.launch
 
@@ -126,7 +127,17 @@ fun HomePagerScreen(
                             }
                         },
                         onPlantClick = {
-                            onPlantClick(it.plant)
+//                            onPlantClick(it.plant)
+                            onPlantClick(
+                                Plant(
+                                    it.plant.plantId ,
+                                    it.plant.name ,
+                                    it.plant.description ,
+                                    it.plant.growZoneNumber ,
+                                    it.plant.wateringInterval ,
+                                    it.plant.imageUrl ,
+                                )
+                            )
                         })
                 }
 

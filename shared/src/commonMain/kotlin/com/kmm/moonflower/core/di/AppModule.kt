@@ -27,6 +27,8 @@ import org.koin.dsl.module
 
 expect val platformModule: Module
 
+expect class KmmDiModule
+
 expect fun appDispatcher(): CoroutineDispatcher
 
 val appModule = module {
@@ -53,6 +55,7 @@ val plantsModule = module {
     single<PlantsRepository> {
         PlantsRepositoryImpl(
             get(),
+            get(named("fileResourceReaderWithCompose"))
         )
     }
 

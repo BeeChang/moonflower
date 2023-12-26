@@ -2,6 +2,7 @@ package com.kmm.moonflower.core.di
 
 import android.content.Context
 import com.kmm.moonflower.core.local.DatabaseDriverFactory
+import com.kmm.moonflower.features.plants.PlantsRepository
 import com.kmm.moonflower.features.plants.usecase.InsertPlantsFromFile
 import com.squareup.sqldelight.db.SqlDriver
 import kotlinx.coroutines.CoroutineDispatcher
@@ -17,20 +18,16 @@ actual val platformModule: Module = module {
 
 }
 
-
-
 actual fun appDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
-class DiAndroid(context: Context)  {
+actual class KmmDiModule(applicationContext: Context) {
 
-    private val koinApp = initKoin(
+    val kmmKoin = initKoin(
         module {
-            single<Context>(named("androidContext")) { context }
+            single<Context>(named("androidContext")) { applicationContext }
         }
     )
 
-    val insertPlantsFromFile : InsertPlantsFromFile by lazy {
-        koinApp.koin.get()
-    }
+    val plantsRepository : PlantsRepository by lazy { kmmKoin.koin.get() }
 
 }
