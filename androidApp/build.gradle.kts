@@ -133,6 +133,9 @@ dependencies {
     androidTestImplementation(libs.accessibility.test.framework)
     androidTestImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.junit)
+
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+
 }
 
 fun getUnsplashAccess(): String? {

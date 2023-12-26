@@ -6,6 +6,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.compose")
     id("com.squareup.sqldelight")
+    kotlin("plugin.serialization")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -52,12 +53,18 @@ kotlin {
                 implementation(libs.ktor.serialization)
                 implementation(libs.ktor.serialization.json)
 
+                //di
+                implementation("io.insert-koin:koin-core:3.1.5")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(libs.kotlinx.test)
-            }
+
+             }
         }
 
         val androidMain by getting {
@@ -65,6 +72,7 @@ kotlin {
                 implementation(libs.ktor.android)
                 // database
                 implementation(libs.squareup.sqldelight.android)
+                implementation("io.insert-koin:koin-android:3.1.5")
             }
         }
 
